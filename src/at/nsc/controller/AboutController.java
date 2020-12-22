@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 /**NSC Calculator - MainController
  * @author Niklas Schachl
- * @version 1.4, 21.12.2020
+ * @version 1.4.1, 22.12.2020
  */
 public class AboutController
 {

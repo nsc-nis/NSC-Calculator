@@ -14,7 +14,7 @@ import at.nsc.model.Model;
 
 /**NSC Calculator - MainController
  * @author Niklas Schachl
- * @version 1.4, 21.12.2020
+ * @version 1.4.1, 22.12.2020
  */
 public class MainController
 {
@@ -38,7 +38,7 @@ public class MainController
             ctrl.stage = stage;
 
             stage.getIcons().add(new Image("/at/nsc/images/icon_logo.png"));
-            stage.setTitle("NIS RPN Calculator");
+            stage.setTitle("NSC Calculator");
             stage.setScene(new Scene(root));
             stage.show();
         }

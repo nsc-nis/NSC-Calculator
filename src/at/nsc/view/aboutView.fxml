@@ -27,7 +27,7 @@
          </VBox.margin>
       </Label>
       <Label prefHeight="25.0" prefWidth="424.0" text="A simple Calculator with a graphical user interface, developed in Java" />
-      <Label text="Version: 1.4" />
+      <Label text="Version: 1.4.1" />
       <Label text="Copyright (C) 2018 - 2020 NSC IT Solutions" />
       <Button mnemonicParsing="false" onAction="#action_close" prefHeight="28.0" prefWidth="71.0" text="Close">
          <VBox.margin>
