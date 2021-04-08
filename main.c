@@ -15,11 +15,16 @@ void printMenu();
 void getNumInput();
 void getStringInput();
 float addition(float num1, float num2);
+float subtraction(float num1, float num2);
+float multiplication(float num1, float num2);
+float division(float num1, float num2);
+int modulo(float num1, float num2);
+float increment(float num);
+float decrement(float num);
 
 //declare variables
 bool isRunning;
 char input[50];
-int compare;
 float input1;
 float input2;
 char strinput1[];
@@ -27,8 +32,6 @@ char strinput2[];
 
 int main()
 {
-
-
     //initialize variables
     isRunning = true;
 
@@ -39,12 +42,21 @@ int main()
         gets(input);
         printf("* Your chose: %s\n", input);
 
-        compare = strcmp(input, add);
-        switch (compare)
+        if (strcmp(input, add) == 0)
         {
-            case 0:
-
+            getNumInput("addition");
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* | Result of %f + %f : %f\n", input1, input2, addition(input1, input2));
+            printf("* |___________________________________________________________________________|\n");
         }
+        if (strcmp(input, sub) == 0)
+        {
+            getNumInput("addition");
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* | Result of %f + %f : %f\n", input1, input2, addition(input1, input2));
+            printf("* |___________________________________________________________________________|\n");
+        }
+
 
     }
     while (isRunning);
@@ -101,4 +113,41 @@ void getStringInput(char operator[])
     scanf("%s", strinput2);
 
     printf("* Read numbers: %f %f", input1, input2);
+}
+
+float addition(float num1, float num2)
+{
+    return num1 + num2;
+}
+
+float subtraction(float num1, float num2)
+{
+    return num1 - num2;
+}
+
+float multiplication(float num1, float num2)
+{
+    return num1 * num2;
+}
+
+float division(float num1, float num2)
+{
+    return num1 / num2;
+}
+
+int modulo(float num1, float num2)
+{
+    int mod1 = (int)num1;
+    int mod2 = (int)num2;
+    return mod1 % mod2;
+}
+
+float increment(float num)
+{
+    return num++;
+}
+
+float decrement(float num)
+{
+    return num--;
 }
