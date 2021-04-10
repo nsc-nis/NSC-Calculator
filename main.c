@@ -39,16 +39,16 @@ char strinput2[50];
 
 int main()
 {
-    //initialize variables
-    isRunning = true;
-    isWrongCommand = false;
-
     //Main program
     do
     {
+        //initialize variables
+        isRunning = true;
+        isWrongCommand = false;
+
         printMenu();
         fflush(stdin);
-        gets(input);
+        scanf("%s", &input);
         printf("* You chose: %s\n", input);
 
         if (strcmp(input, add) == 0)
@@ -151,7 +151,10 @@ int main()
             printf("* |___________________________________________________________________________|\n");
         }
 
-        if (strcmp(input, add) != 0 && strcmp(input, sub) != 0 && strcmp(input, mul) != 0 && strcmp(input, div) != 0 && strcmp(input, mod) != 0 && strcmp(input, inc) != 0 && strcmp(input, dec) != 0 && strcmp(input, cmp) == 0 && strcmp(input, strc) != 0 && strcmp(input, stca) != 0)
+        if (strcmp(input, "exit") == 0)
+            isRunning = false;
+
+        if (strcmp(input, add) != 0 && strcmp(input, sub) != 0 && strcmp(input, mul) != 0 && strcmp(input, div) != 0 && strcmp(input, mod) != 0 && strcmp(input, inc) != 0 && strcmp(input, dec) != 0 && strcmp(input, cmp) != 0 && strcmp(input, strc) != 0 && strcmp(input, stca) != 0 && isRunning)
         {
             printf("*  _______\n");
             printf("* | ERROR | Unknown command\n");
@@ -159,8 +162,9 @@ int main()
             isWrongCommand = true;
         }
 
-        if (!isWrongCommand)
+        if (!isWrongCommand && isRunning)
         {
+            fflush(stdin);
             printf("*  ___________________________________________________________________________ \n");
             printf("* | Would you like to do more calculations or would you like to exit the      |\n");
             printf("* | program?                                                                  |\n");
@@ -169,16 +173,13 @@ int main()
             printf("* |___________________________________________________________________________|\n");
             printf("./CALCULATOR/exit/");
             fflush(stdin);
-            gets(inputExit);
+            scanf("%s", &inputExit);
+            printf("* You chose: %s\n", inputExit);
 
-            if (strcmp(inputExit, "cont") == 0)
+            if (strcmp(inputExit, "cont") == 0)  //funktioniert
                 isRunning = true;
-            else if (strcmp(input, "exit") == 0)
-            {
-                printf("*  ___________________________________________________________________________ \n");
-                printf("* |                         Shutting down...                                  |\n");
-                printf("* |___________________________________________________________________________|\n");
-            }
+            else if (strcmp(inputExit, "exit") == 0)  //funktioniert nicht - keine Ahnung warum
+                isRunning = false;
             else
             {
                 printf("*  _______\n");
@@ -186,6 +187,13 @@ int main()
                 printf("* |_______|\n");
                 isWrongCommand = true;
             }
+        }
+
+        if (!isRunning)
+        {
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* |                         Shutting down...                                  |\n");
+            printf("* |___________________________________________________________________________|\n");
         }
     }
     while (isRunning);
@@ -213,7 +221,7 @@ void printMenu()
     printf("* | division / (div)                                                          |\n");
     printf("* | modulo %% (mod)                                                            |\n");
     printf("* | String compare (strcmp)                                                   |\n");
-    printf("* | String chain (strcat)                                                      |\n");
+    printf("* | String chain (strcat)                                                     |\n");
     printf("* | increment ++ (inc)                                                        |\n");
     printf("* | decrement -- (dec)                                                        |\n");
     printf("* | compare ==, <, > (cmp)                                                    |\n");
@@ -241,12 +249,12 @@ void getStringInput(char operator[])
     printf("* Please type in the first string for the calculation:\n");
     printf("./CALCULATOR/%s/", operator);
     fflush(stdin);
-    gets(strinput1);
+    scanf("%s", &strinput1);
 
     printf("* Please type in the second string for the calculation:\n");
     printf("./CALCULATOR/%s/", operator);
     fflush(stdin);
-    gets(strinput2);
+    scanf("%s", &strinput2);
 }
 
 float addition(float num1, float num2)
