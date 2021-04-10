@@ -15,8 +15,8 @@
 
 //declare functions
 void printMenu();
-void getNumInput();
-void getStringInput();
+void getNumInput(char operator[]);
+void getStringInput(char operator[]);
 float addition(float num1, float num2);
 float subtraction(float num1, float num2);
 float multiplication(float num1, float num2);
@@ -28,17 +28,20 @@ int compare (float num1, float num2);
 
 //declare variables
 bool isRunning;
+bool isWrongCommand;
 char input[50];
+char inputExit[50];
 float input1;
 float input2;
 char output;
-char strinput1[];
-char strinput2[];
+char strinput1[50];
+char strinput2[50];
 
 int main()
 {
     //initialize variables
     isRunning = true;
+    isWrongCommand = false;
 
     //Main program
     do
@@ -55,6 +58,7 @@ int main()
             printf("* | Result of %f + %f : %f\n", input1, input2, addition(input1, input2));
             printf("* |___________________________________________________________________________|\n");
         }
+
         if (strcmp(input, sub) == 0)
         {
             getNumInput("subtraction");
@@ -62,6 +66,7 @@ int main()
             printf("* | Result of %f - %f : %f\n", input1, input2, subtraction(input1, input2));
             printf("* |___________________________________________________________________________|\n");
         }
+
         if (strcmp(input, mul) == 0)
         {
             getNumInput("multiplication");
@@ -69,6 +74,7 @@ int main()
             printf("* | Result of %f * %f : %f\n", input1, input2, multiplication(input1, input2));
             printf("* |___________________________________________________________________________|\n");
         }
+
         if (strcmp(input, div) == 0)
         {
             getNumInput("division");
@@ -76,6 +82,7 @@ int main()
             printf("* | Result of %f / %f : %f\n", input1, input2, division(input1, input2));
             printf("* |___________________________________________________________________________|\n");
         }
+
         if (strcmp(input, mod) == 0)
         {
             getNumInput("modulo");
@@ -83,6 +90,7 @@ int main()
             printf("* | Result of %f %% %f : %d\n", input1, input2, modulo(input1, input2));
             printf("* |___________________________________________________________________________|\n");
         }
+
        if (strcmp(input, inc) == 0)
        {
            printf("* Please type in a number to increment:\n");
@@ -93,6 +101,7 @@ int main()
            printf("* | Increment of %f : %f\n", input1, increment(input1));
            printf("* |___________________________________________________________________________|\n");
        }
+
         if (strcmp(input, dec) == 0)
         {
             printf("* Please type in a number to decrement:\n");
@@ -103,6 +112,7 @@ int main()
             printf("* | Decrement of %f : %f\n", input1, decrement(input1));
             printf("* |___________________________________________________________________________|\n");
         }
+
         if (strcmp(input, cmp) == 0)
         {
             getNumInput("compare");
@@ -124,11 +134,61 @@ int main()
             printf("* | Result: %f %c %f\n", input1, output ,input2);
             printf("* |___________________________________________________________________________|\n");
         }
-        isRunning = false;
+
+        if (strcmp(input, strc) == 0)
+        {
+            getStringInput("string-compare");
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* | Result of string-compare %s and %s : %d\n", strinput1, strinput2, strcmp(strinput1, strinput2));
+            printf("* |___________________________________________________________________________|\n");
+        }
+
+        if (strcmp(input, stca) == 0)
+        {
+            getStringInput("string-chain");
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* | Result of string-chain  : %s\n", strcat(strinput1, strinput2));
+            printf("* |___________________________________________________________________________|\n");
+        }
+
+        if (strcmp(input, add) != 0 && strcmp(input, sub) != 0 && strcmp(input, mul) != 0 && strcmp(input, div) != 0 && strcmp(input, mod) != 0 && strcmp(input, inc) != 0 && strcmp(input, dec) != 0 && strcmp(input, cmp) == 0 && strcmp(input, strc) != 0 && strcmp(input, stca) != 0)
+        {
+            printf("*  _______\n");
+            printf("* | ERROR | Unknown command\n");
+            printf("* |_______|\n");
+            isWrongCommand = true;
+        }
+
+        if (!isWrongCommand)
+        {
+            printf("*  ___________________________________________________________________________ \n");
+            printf("* | Would you like to do more calculations or would you like to exit the      |\n");
+            printf("* | program?                                                                  |\n");
+            printf("* | do more calculations (cont)                                               |\n");
+            printf("* | exit the program (exit)                                                   |\n");
+            printf("* |___________________________________________________________________________|\n");
+            printf("./CALCULATOR/exit/");
+            fflush(stdin);
+            gets(inputExit);
+
+            if (strcmp(inputExit, "cont") == 0)
+                isRunning = true;
+            else if (strcmp(input, "exit") == 0)
+            {
+                printf("*  ___________________________________________________________________________ \n");
+                printf("* |                         Shutting down...                                  |\n");
+                printf("* |___________________________________________________________________________|\n");
+            }
+            else
+            {
+                printf("*  _______\n");
+                printf("* | ERROR | Unknown command\n");
+                printf("* |_______|\n");
+                isWrongCommand = true;
+            }
+        }
     }
     while (isRunning);
-
-
 
     return 0;
 }
@@ -153,7 +213,7 @@ void printMenu()
     printf("* | division / (div)                                                          |\n");
     printf("* | modulo %% (mod)                                                            |\n");
     printf("* | String compare (strcmp)                                                   |\n");
-    printf("* | String link (strcat)                                                      |\n");
+    printf("* | String chain (strcat)                                                      |\n");
     printf("* | increment ++ (inc)                                                        |\n");
     printf("* | decrement -- (dec)                                                        |\n");
     printf("* | compare ==, <, > (cmp)                                                    |\n");
